@@ -12,9 +12,11 @@ export default function SavedProject({ projectInfo, onDelete }) {
       return updatedTasks;
     });
   };
+
   const handleClearTask = (index) => {
-    setSavedTasks((prev) => prev.filter((task, i) => i != index));
+    setSavedTasks((prev) => prev.filter((t, i) => i != index));
   };
+
   return (
     <div className="absolute flex w-[90%] max-w-[1000px] flex-col bg-white">
       <div className="flex justify-between">
@@ -36,7 +38,9 @@ export default function SavedProject({ projectInfo, onDelete }) {
       </div>
 
       <div className="mt-[20px]">
-        <p className="text-[26px] mb-[15px] font-bold text-neutral-800">Tasks</p>
+        <p className="mb-[15px] text-[26px] font-bold text-neutral-800">
+          Tasks
+        </p>
         <div className="flex gap-x-[30px]">
           <input
             ref={task}

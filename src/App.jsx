@@ -21,11 +21,7 @@ function App() {
   };
 
   const handleDeleteProject = (title) => {
-    setSavedProjects((prev) => {
-      const i = savedProjects.find((project) => project.title == title);
-      prev.splice(i, 1);
-      return prev;
-    });
+    setSavedProjects(() => savedProjects.filter((proj) => proj.title != title));
     handleChangePage("main");
   };
 

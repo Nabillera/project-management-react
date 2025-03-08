@@ -1,11 +1,18 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Warning from "../assets/warning.webp"
 
 export default function NewProjectForm({ onSave, onChangePage }) {
   const title = useRef();
   const desc = useRef();
   const date = useRef();
+  const [emptyFields, setEmptyFields] = useState(false);
   const handleSave = () => {
+    if (!title.current.value || !desc.current.value || !date.current.value) {
+      setEmptyFields(() => true);
+      return;
+    }
     onSave(title.current.value, desc.current.value, date.current.value);
+    setEmptyFields(() => false);
     onChangePage("main");
   };
   return (
@@ -59,6 +66,13 @@ export default function NewProjectForm({ onSave, onChangePage }) {
         type="date"
         ref={date}
       />
+
+      {emptyFields && (
+        <div className="flex items-center pt-[20px] ml-[-8px]">
+          <img className="w-[40px]" src={Warning}/>
+          <span className="mt-[5px] font-bold">Please, fill in all the fields.</span>
+        </div>
+      )}
     </div>
   );
 }
